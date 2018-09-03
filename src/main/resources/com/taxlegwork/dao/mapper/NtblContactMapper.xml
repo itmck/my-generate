@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.taxlegwork.dao.mapper.NtblContactMapper" >
+  <resultMap id="BaseResultMap" type="com.taxlegwork.dao.model.contact.NtblContact" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="organization_id" property="organizationId" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="NVARCHAR" />
+    <result column="phone" property="phone" jdbcType="NVARCHAR" />
+    <result column="head_img" property="headImg" jdbcType="NVARCHAR" />
+    <result column="gender" property="gender" jdbcType="INTEGER" />
+    <result column="age_bracket" property="ageBracket" jdbcType="NVARCHAR" />
+    <result column="weixin" property="weixin" jdbcType="NVARCHAR" />
+    <result column="QQ" property="qq" jdbcType="NVARCHAR" />
+    <result column="department" property="department" jdbcType="NVARCHAR" />
+    <result column="position" property="position" jdbcType="NVARCHAR" />
+    <result column="position_statement" property="positionStatement" jdbcType="NVARCHAR" />
+    <result column="office" property="office" jdbcType="NVARCHAR" />
+    <result column="service_window" property="serviceWindow" jdbcType="INTEGER" />
+    <result column="person_style" property="personStyle" jdbcType="NVARCHAR" />
+    <result column="work_style" property="workStyle" jdbcType="NVARCHAR" />
+    <result column="positon_change" property="positonChange" jdbcType="NVARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="manage_id" property="manageId" jdbcType="INTEGER" />
+    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+    <result column="modify_id" property="modifyId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, organization_id, name, phone, head_img, gender, age_bracket, weixin, QQ, department, 
+    position, position_statement, office, service_window, person_style, work_style, positon_change, 
+    status, create_time, manage_id, modify_time, modify_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.taxlegwork.dao.model.contact.NtblContactExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ntbl_contact
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from ntbl_contact
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from ntbl_contact
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.taxlegwork.dao.model.contact.NtblContactExample" >
+    delete from ntbl_contact
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.taxlegwork.dao.model.contact.NtblContact" >
+    insert into ntbl_contact (id, organization_id, name, 
+      phone, head_img, gender, 
+      age_bracket, weixin, QQ, 
+      department, position, position_statement, 
+      office, service_window, person_style, 
+      work_style, positon_change, status, 
+      create_time, manage_id, modify_time, 
+      modify_id)
+    values (#{id,jdbcType=BIGINT}, #{organizationId,jdbcType=BIGINT}, #{name,jdbcType=NVARCHAR}, 
+      #{phone,jdbcType=NVARCHAR}, #{headImg,jdbcType=NVARCHAR}, #{gender,jdbcType=INTEGER}, 
+      #{ageBracket,jdbcType=NVARCHAR}, #{weixin,jdbcType=NVARCHAR}, #{qq,jdbcType=NVARCHAR}, 
+      #{department,jdbcType=NVARCHAR}, #{position,jdbcType=NVARCHAR}, #{positionStatement,jdbcType=NVARCHAR}, 
+      #{office,jdbcType=NVARCHAR}, #{serviceWindow,jdbcType=INTEGER}, #{personStyle,jdbcType=NVARCHAR}, 
+      #{workStyle,jdbcType=NVARCHAR}, #{positonChange,jdbcType=NVARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{manageId,jdbcType=INTEGER}, #{modifyTime,jdbcType=TIMESTAMP}, 
+      #{modifyId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.taxlegwork.dao.model.contact.NtblContact" >
+    insert into ntbl_contact
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="organizationId != null" >
+        organization_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="headImg != null" >
+        head_img,
+      </if>
+      <if test="gender != null" >
+        gender,
+      </if>
+      <if test="ageBracket != null" >
+        age_bracket,
+      </if>
+      <if test="weixin != null" >
+        weixin,
+      </if>
+      <if test="qq != null" >
+        QQ,
+      </if>
+      <if test="department != null" >
+        department,
+      </if>
+      <if test="position != null" >
+        position,
+      </if>
+      <if test="positionStatement != null" >
+        position_statement,
+      </if>
+      <if test="office != null" >
+        office,
+      </if>
+      <if test="serviceWindow != null" >
+        service_window,
+      </if>
+      <if test="personStyle != null" >
+        person_style,
+      </if>
+      <if test="workStyle != null" >
+        work_style,
+      </if>
+      <if test="positonChange != null" >
+        positon_change,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="manageId != null" >
+        manage_id,
+      </if>
+      <if test="modifyTime != null" >
+        modify_time,
+      </if>
+      <if test="modifyId != null" >
+        modify_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="organizationId != null" >
+        #{organizationId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=NVARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=NVARCHAR},
+      </if>
+      <if test="headImg != null" >
+        #{headImg,jdbcType=NVARCHAR},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="ageBracket != null" >
+        #{ageBracket,jdbcType=NVARCHAR},
+      </if>
+      <if test="weixin != null" >
+        #{weixin,jdbcType=NVARCHAR},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=NVARCHAR},
+      </if>
+      <if test="department != null" >
+        #{department,jdbcType=NVARCHAR},
+      </if>
+      <if test="position != null" >
+        #{position,jdbcType=NVARCHAR},
+      </if>
+      <if test="positionStatement != null" >
+        #{positionStatement,jdbcType=NVARCHAR},
+      </if>
+      <if test="office != null" >
+        #{office,jdbcType=NVARCHAR},
+      </if>
+      <if test="serviceWindow != null" >
+        #{serviceWindow,jdbcType=INTEGER},
+      </if>
+      <if test="personStyle != null" >
+        #{personStyle,jdbcType=NVARCHAR},
+      </if>
+      <if test="workStyle != null" >
+        #{workStyle,jdbcType=NVARCHAR},
+      </if>
+      <if test="positonChange != null" >
+        #{positonChange,jdbcType=NVARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="manageId != null" >
+        #{manageId,jdbcType=INTEGER},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyId != null" >
+        #{modifyId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.taxlegwork.dao.model.contact.NtblContactExample" resultType="java.lang.Integer" >
+    select count(*) from ntbl_contact
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ntbl_contact
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.organizationId != null" >
+        organization_id = #{record.organizationId,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.headImg != null" >
+        head_img = #{record.headImg,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.gender != null" >
+        gender = #{record.gender,jdbcType=INTEGER},
+      </if>
+      <if test="record.ageBracket != null" >
+        age_bracket = #{record.ageBracket,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.weixin != null" >
+        weixin = #{record.weixin,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.qq != null" >
+        QQ = #{record.qq,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.department != null" >
+        department = #{record.department,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.position != null" >
+        position = #{record.position,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.positionStatement != null" >
+        position_statement = #{record.positionStatement,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.office != null" >
+        office = #{record.office,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.serviceWindow != null" >
+        service_window = #{record.serviceWindow,jdbcType=INTEGER},
+      </if>
+      <if test="record.personStyle != null" >
+        person_style = #{record.personStyle,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.workStyle != null" >
+        work_style = #{record.workStyle,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.positonChange != null" >
+        positon_change = #{record.positonChange,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.manageId != null" >
+        manage_id = #{record.manageId,jdbcType=INTEGER},
+      </if>
+      <if test="record.modifyTime != null" >
+        modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyId != null" >
+        modify_id = #{record.modifyId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ntbl_contact
+    set id = #{record.id,jdbcType=BIGINT},
+      organization_id = #{record.organizationId,jdbcType=BIGINT},
+      name = #{record.name,jdbcType=NVARCHAR},
+      phone = #{record.phone,jdbcType=NVARCHAR},
+      head_img = #{record.headImg,jdbcType=NVARCHAR},
+      gender = #{record.gender,jdbcType=INTEGER},
+      age_bracket = #{record.ageBracket,jdbcType=NVARCHAR},
+      weixin = #{record.weixin,jdbcType=NVARCHAR},
+      QQ = #{record.qq,jdbcType=NVARCHAR},
+      department = #{record.department,jdbcType=NVARCHAR},
+      position = #{record.position,jdbcType=NVARCHAR},
+      position_statement = #{record.positionStatement,jdbcType=NVARCHAR},
+      office = #{record.office,jdbcType=NVARCHAR},
+      service_window = #{record.serviceWindow,jdbcType=INTEGER},
+      person_style = #{record.personStyle,jdbcType=NVARCHAR},
+      work_style = #{record.workStyle,jdbcType=NVARCHAR},
+      positon_change = #{record.positonChange,jdbcType=NVARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      manage_id = #{record.manageId,jdbcType=INTEGER},
+      modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      modify_id = #{record.modifyId,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.taxlegwork.dao.model.contact.NtblContact" >
+    update ntbl_contact
+    <set >
+      <if test="organizationId != null" >
+        organization_id = #{organizationId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=NVARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=NVARCHAR},
+      </if>
+      <if test="headImg != null" >
+        head_img = #{headImg,jdbcType=NVARCHAR},
+      </if>
+      <if test="gender != null" >
+        gender = #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="ageBracket != null" >
+        age_bracket = #{ageBracket,jdbcType=NVARCHAR},
+      </if>
+      <if test="weixin != null" >
+        weixin = #{weixin,jdbcType=NVARCHAR},
+      </if>
+      <if test="qq != null" >
+        QQ = #{qq,jdbcType=NVARCHAR},
+      </if>
+      <if test="department != null" >
+        department = #{department,jdbcType=NVARCHAR},
+      </if>
+      <if test="position != null" >
+        position = #{position,jdbcType=NVARCHAR},
+      </if>
+      <if test="positionStatement != null" >
+        position_statement = #{positionStatement,jdbcType=NVARCHAR},
+      </if>
+      <if test="office != null" >
+        office = #{office,jdbcType=NVARCHAR},
+      </if>
+      <if test="serviceWindow != null" >
+        service_window = #{serviceWindow,jdbcType=INTEGER},
+      </if>
+      <if test="personStyle != null" >
+        person_style = #{personStyle,jdbcType=NVARCHAR},
+      </if>
+      <if test="workStyle != null" >
+        work_style = #{workStyle,jdbcType=NVARCHAR},
+      </if>
+      <if test="positonChange != null" >
+        positon_change = #{positonChange,jdbcType=NVARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="manageId != null" >
+        manage_id = #{manageId,jdbcType=INTEGER},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyId != null" >
+        modify_id = #{modifyId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.taxlegwork.dao.model.contact.NtblContact" >
+    update ntbl_contact
+    set organization_id = #{organizationId,jdbcType=BIGINT},
+      name = #{name,jdbcType=NVARCHAR},
+      phone = #{phone,jdbcType=NVARCHAR},
+      head_img = #{headImg,jdbcType=NVARCHAR},
+      gender = #{gender,jdbcType=INTEGER},
+      age_bracket = #{ageBracket,jdbcType=NVARCHAR},
+      weixin = #{weixin,jdbcType=NVARCHAR},
+      QQ = #{qq,jdbcType=NVARCHAR},
+      department = #{department,jdbcType=NVARCHAR},
+      position = #{position,jdbcType=NVARCHAR},
+      position_statement = #{positionStatement,jdbcType=NVARCHAR},
+      office = #{office,jdbcType=NVARCHAR},
+      service_window = #{serviceWindow,jdbcType=INTEGER},
+      person_style = #{personStyle,jdbcType=NVARCHAR},
+      work_style = #{workStyle,jdbcType=NVARCHAR},
+      positon_change = #{positonChange,jdbcType=NVARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      manage_id = #{manageId,jdbcType=INTEGER},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      modify_id = #{modifyId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
